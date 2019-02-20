@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\Shape">
+      <UniqueIdentifier>{b219ccf7-11ce-4f99-b3f5-6d4ba10bb00d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\ShapeHandler">
+      <UniqueIdentifier>{e26b66dc-770d-4e37-a1e5-35e469cb88fb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="maptool.h">
@@ -48,6 +54,21 @@
     <ClInclude Include="DlgTab2.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>소스 파일\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>소스 파일\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Line.h">
+      <Filter>소스 파일\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h">
+      <Filter>소스 파일\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeHandler.h">
+      <Filter>소스 파일\ShapeHandler</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="maptool.cpp">
@@ -73,6 +94,18 @@
     </ClCompile>
     <ClCompile Include="DlgTab2.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Shape.cpp">
+      <Filter>소스 파일\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Line.cpp">
+      <Filter>소스 파일\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Rect.cpp">
+      <Filter>소스 파일\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeHandler.cpp">
+      <Filter>소스 파일\ShapeHandler</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

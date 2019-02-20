@@ -4,7 +4,10 @@
 
 #pragma once
 #include "maptoolDoc.h"
-
+#include "Shape.h"
+#include <vector>
+#include <iostream>
+#include <WinUser.h>
 
 class CmaptoolView : public CView
 {
@@ -52,11 +55,20 @@ public:
 	/// 생성된 객체에는 시작점과 끝점의 정보가 담긴다.
 	/// 암튼 저 Draw를 활용해서 그리는 걸로 하자
 	/// 그리고 사각형 내부 색칠을 없에는 함수도 만들자. 얍!
-
+	
 	virtual void DrawLine(); /// 라인 생성
 	virtual void DrawRect(); /// 사각형 생성
-	int nDrawMode;
+	virtual void SetDrawMode(int nDrawMode);
+
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
+	void PointCheck(CPoint &point);
 private:
+	int m_nDrawMode;
+	bool m_bDragFlag;
+	CPoint m_CurrentMouse;
+	CPoint m_StartMouse;
+	CPoint m_EndMouse;
 };
 
 #ifndef _DEBUG  // maptoolView.cpp의 디버그 버전

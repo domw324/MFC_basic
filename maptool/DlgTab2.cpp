@@ -8,6 +8,7 @@
 #include "MainFrm.h"
 #include "ControlView.h"
 #include "maptoolView.h"
+#include "define.h"
 
 // CDlgTab2 대화 상자
 
@@ -38,7 +39,7 @@ void CDlgTab2::OnBnClickedButtonLine()
  	CMainFrame* pFrame = (CMainFrame*)AfxGetMainWnd(); /// 프레임 윈도우 포인터
  	CmaptoolView* pView = (CmaptoolView*)pFrame->m_wndSplitter.GetPane(0, 0); /// 활성화된 뷰의 포인터
 
-	pView->nDrawMode = 1;
+	pView->SetDrawMode(MODE::DRAW_LINE);
 	pView->DrawLine();
 																			  // 
 // 
@@ -62,7 +63,7 @@ void CDlgTab2::OnBnClickedButtonRect()
 	CMainFrame* pFrame = (CMainFrame*)AfxGetMainWnd(); /// 프레임 윈도우 포인터
 	CmaptoolView* pView = (CmaptoolView*)pFrame->m_wndSplitter.GetPane(0, 0); /// 활성화된 뷰의 포인터
 
-	pView->nDrawMode = 2;
+	pView->SetDrawMode(MODE::DRAW_RECT);
 	pView->DrawRect();
 
  //

@@ -11,6 +11,7 @@
 
 #include "maptoolDoc.h"
 #include "maptoolView.h"
+#include "define.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -35,6 +36,8 @@ END_MESSAGE_MAP()
 CmaptoolView::CmaptoolView() noexcept
 {
 	// TODO: 여기에 생성 코드를 추가합니다.
+
+	this->m_nDrawMode = MODE::NONE;
 }
 
 CmaptoolView::~CmaptoolView()
@@ -126,6 +129,49 @@ void CmaptoolView::DrawRect()
 	p->Rectangle(nStartX, nStartY, nEndX, nEndY);
 
 	this->ReleaseDC(p);
+}
+
+void CmaptoolView::SetDrawMode(int nDrawMode)
+{
+	this->m_nDrawMode = nDrawMode;
+}
+
+void CmaptoolView::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	m_bDragFlag = true;
+	PointCheck(point);
+
+	m_StartMouse = point;
+	
+// 	RedrawWindow();
+// 	SetCapture();
+
+	CView::OnLButtonDown(nFlags, point);
+}
+
+void CmaptoolView::OnLButtonUp(UINT nFlags, CPoint point)
+{
+}
+
+void CmaptoolView::PointCheck(CPoint & point)
+{
+	if (point.x < 0)
+	{
+		point.x = 0;
+	}
+	if (point.x > 768)
+	{
+		point.x = 768;
+	}
+	if (point.y < 0)
+	{
+		point.y = 0;
+	}
+	if (point.y > 768)
+	{
+		point.y = 768;
+	}
 }
 
 
