@@ -57,7 +57,12 @@ public:
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+// 	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
+// 	afx_msg void OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags);
+// 	afx_msg void OnChar(UINT nChar, UINT nRepCnt, UINT nFlags);
 	virtual void SetDrawMode(int nDrawMode);
+	virtual void DeleteBack();
+	virtual void DeleteAll();
 
 private:
 	afx_msg void OnPaint();
@@ -70,6 +75,7 @@ private:
 	bool m_bDragFlag;
 	CPoint m_CurrentMouse;
 	CPoint m_StartMouse;
+	bool m_bCtrlKey;
 
 	CShapeHandler pShapeHandler;
 };

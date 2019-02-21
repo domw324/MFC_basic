@@ -16,6 +16,7 @@
 #include "Shape.h"
 #include "Rect.h"
 #include "BufferDC.h"
+#include <WinUser.h>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -36,6 +37,9 @@ BEGIN_MESSAGE_MAP(CmaptoolView, CView) /// 사용할 메시지를 미리 등록�
 	ON_WM_LBUTTONDOWN()
 	ON_WM_LBUTTONUP()
 	ON_WM_MOUSEMOVE()
+// 	ON_WM_KEYDOWN()
+// 	ON_WM_KEYUP()
+// 	ON_WM_CHAR()
 END_MESSAGE_MAP()
 
 // CmaptoolView 생성/소멸
@@ -46,6 +50,7 @@ CmaptoolView::CmaptoolView() noexcept
 
 	this->m_nDrawMode = MODE::NONE;
 	this->m_bDragFlag = FALSE;
+	this->m_bCtrlKey = FALSE;
 }
 
 CmaptoolView::~CmaptoolView()
@@ -195,9 +200,61 @@ void CmaptoolView::OnMouseMove(UINT nFlags, CPoint point)
 	}
 }
 
+// void CmaptoolView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+// {
+// 	//TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+// 
+// 	if (GetKeyState(VK_CONTROL) & 0x8000)
+// 	{
+// 
+// 		m_bCtrlKey = TRUE;
+// 	}
+// 
+// 	CView::OnKeyDown(nChar, nRepCnt, nFlags);
+// }
+// 
+// void CmaptoolView::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
+// {
+// 	//TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+// 
+// 	if (GetKeyState(VK_CONTROL) & 0x8000)
+// 	{
+// 		m_bCtrlKey = FALSE;
+// 	}
+// 
+// 	CView::OnKeyUp(nChar, nRepCnt, nFlags);
+// }
+// 
+// void CmaptoolView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
+// {
+// 	//TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+// 
+// 	if (m_bCtrlKey && (nChar == 'z' || nChar == 'Z'))
+// 	{
+// 		DeleteBack();
+// 	}
+// 
+// 	CView::OnChar(nChar, nRepCnt, nFlags);
+// }
+
 void CmaptoolView::SetDrawMode(int nDrawMode)
 {
 	this->m_nDrawMode = nDrawMode;
+}
+
+void CmaptoolView::DeleteBack()
+{
+	pShapeHandler.DeleteBack();
+
+	RedrawWindow();
+	OnPaint();
+}
+
+void CmaptoolView::DeleteAll()
+{
+	pShapeHandler.DeleteAll();
+
+	RedrawWindow();
 }
 
 inline void CmaptoolView::OnPaint()

@@ -41,9 +41,22 @@ void CShapeHandler::DeleteShape(int nIndex)
 	m_ShapeArr.erase(m_ShapeArr.begin() + nIndex);
 }
 
+void CShapeHandler::DeleteBack()
+{
+	int nSize = m_ShapeArr.size();
+	
+	if (nSize)
+	{
+		m_ShapeArr.erase(m_ShapeArr.begin() + nSize - 1);
+	}
+}
+
 void CShapeHandler::DeleteAll()
 {
-	/// ±¸Çö
+	while (!m_ShapeArr.empty())
+	{
+		m_ShapeArr.erase(m_ShapeArr.begin());
+	}
 }
 
 CShape* CShapeHandler::GetObject(int nIndex)

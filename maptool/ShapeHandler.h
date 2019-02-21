@@ -10,6 +10,7 @@ public:
 
 	void CreateShape(int nShapeType, CPoint pntStart, CPoint pntEnd);
 	void DeleteShape(int nIndex);
+	void DeleteBack();
 	void DeleteAll();
 	CShape* GetObject(int nIndex);
 	int GetSize();

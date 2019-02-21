@@ -28,4 +28,8 @@ protected:
 public:
 	virtual afx_msg void OnBnClickedButtonLine();
 	virtual afx_msg void OnBnClickedButtonRect();
+	afx_msg void OnBnClickedButtonBack();
+	afx_msg void OnBnClickedButtonDeleteAll();
+
+private:
 };
