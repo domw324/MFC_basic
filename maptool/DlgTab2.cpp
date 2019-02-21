@@ -40,7 +40,6 @@ void CDlgTab2::OnBnClickedButtonLine()
  	CmaptoolView* pView = (CmaptoolView*)pFrame->m_wndSplitter.GetPane(0, 0); /// 활성화된 뷰의 포인터
 
 	pView->SetDrawMode(MODE::DRAW_LINE);
-	pView->DrawLine();
 																			  // 
 // 
 // 	CDC* p = pView->GetWindowDC();
@@ -64,7 +63,6 @@ void CDlgTab2::OnBnClickedButtonRect()
 	CmaptoolView* pView = (CmaptoolView*)pFrame->m_wndSplitter.GetPane(0, 0); /// 활성화된 뷰의 포인터
 
 	pView->SetDrawMode(MODE::DRAW_RECT);
-	pView->DrawRect();
 
  //
  //	CDC* p = pView->GetWindowDC();

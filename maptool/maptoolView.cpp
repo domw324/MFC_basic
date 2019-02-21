@@ -22,13 +22,16 @@
 
 IMPLEMENT_DYNCREATE(CmaptoolView, CView)
 
-BEGIN_MESSAGE_MAP(CmaptoolView, CView)
+BEGIN_MESSAGE_MAP(CmaptoolView, CView) /// 사용할 메시지를 미리 등록해놔야 사용 가능하다!!
 	// 표준 인쇄 명령입니다.
 	ON_COMMAND(ID_FILE_PRINT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CmaptoolView::OnFilePrintPreview)
 	ON_WM_CONTEXTMENU()
 	ON_WM_RBUTTONUP()
+	ON_WM_LBUTTONDOWN()
+	ON_WM_LBUTTONUP()
+	ON_WM_MOUSEMOVE()
 END_MESSAGE_MAP()
 
 // CmaptoolView 생성/소멸
@@ -38,6 +41,7 @@ CmaptoolView::CmaptoolView() noexcept
 	// TODO: 여기에 생성 코드를 추가합니다.
 
 	this->m_nDrawMode = MODE::NONE;
+	this->m_bDragFlag = FALSE;
 }
 
 CmaptoolView::~CmaptoolView()
@@ -104,29 +108,25 @@ void CmaptoolView::OnContextMenu(CWnd* /* pWnd */, CPoint point)
 #endif
 }
 
-void CmaptoolView::DrawLine()
+void CmaptoolView::DrawLine(CPoint &pntStart, CPoint &pntEnd)
 {
-	/// 이제 생성은 된다.
+	RedrawWindow();
+
 	CDC* p = this->GetWindowDC();
 
-	int nStartX, nStartY, nEndX, nEndY;
-	nStartX = nStartY = 10;
-	nEndX = nEndY = 200;
-	p->MoveTo(nStartX, nStartY);
- 	p->LineTo(nEndX, nEndY);
+	p->MoveTo(pntStart.x, pntStart.y);
+ 	p->LineTo(pntEnd.x, pntEnd.y);
 
 	this->ReleaseDC(p);
 }
 
-void CmaptoolView::DrawRect()
+void CmaptoolView::DrawRect(CPoint &pntStart, CPoint &pntEnd)
 {
-	/// 이제 생성은 된다.
+	RedrawWindow();
+
 	CDC* p = this->GetWindowDC();
 
-	int nStartX, nStartY, nEndX, nEndY;
-	nStartX = nStartY = 10;
-	nEndX = nEndY = 200;
-	p->Rectangle(nStartX, nStartY, nEndX, nEndY);
+	p->Rectangle(pntStart.x, pntStart.y, pntEnd.x, pntEnd.y);
 
 	this->ReleaseDC(p);
 }
@@ -144,14 +144,64 @@ void CmaptoolView::OnLButtonDown(UINT nFlags, CPoint point)
 
 	m_StartMouse = point;
 	
-// 	RedrawWindow();
-// 	SetCapture();
+// 	CDC* p = this->GetWindowDC();
+// 	CString strPoint = _T("test");
+// 	strPoint.Format(_T("X:%03d, Y%03d"), m_StartMouse.x, m_StartMouse.y);
+// 
+//  	RedrawWindow();
+// 
+// 	p->TextOutW(m_StartMouse.x, m_StartMouse.y, strPoint);
+// 
+// 	this->ReleaseDC(p);
+
+ 	SetCapture(); /// 활성 영역 외의 메세지 받는 함수이다. 활성화 되면 다른 컨트롤 사용 불가.
 
 	CView::OnLButtonDown(nFlags, point);
 }
 
 void CmaptoolView::OnLButtonUp(UINT nFlags, CPoint point)
 {
+	m_bDragFlag = false;
+	m_CurrentMouse = point;
+
+	if (m_nDrawMode == SHAPE::S_LINE)
+	{
+		DrawLine(m_StartMouse, m_CurrentMouse);
+	}
+	else if(m_nDrawMode == SHAPE::S_RECT)
+	{
+		DrawRect(m_StartMouse, m_CurrentMouse);
+	}
+	else {} // SHAPE::NONE
+
+	ReleaseCapture();
+}
+
+void CmaptoolView::OnMouseMove(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+
+	if (m_bDragFlag)
+	{
+		m_CurrentMouse = point;
+		if (m_nDrawMode == SHAPE::S_LINE)
+		{
+
+//  			CDC* p = this->GetWindowDC();
+//  			CView::OnMouseMove(nFlags, point);
+//  			CString strPoint = _T("test");
+//  			strPoint.Format(_T("X:%03d, Y%03d"), m_CurrentMouse.x, m_CurrentMouse.y);
+//  			RedrawWindow();
+//  			p->TextOutW(m_CurrentMouse.x, m_CurrentMouse.y, strPoint);
+
+			DrawLine(m_StartMouse, m_CurrentMouse);
+		}
+		else if(m_nDrawMode == SHAPE::S_RECT)
+		{
+			DrawRect(m_StartMouse, m_CurrentMouse);
+		}
+		else {} // SHAPE::NONE
+	}
 }
 
 void CmaptoolView::PointCheck(CPoint & point)
