@@ -3,11 +3,10 @@
 
 CShape::CShape()
 {
-	this->nShapeType = NULL;
-	this->pntStart->nX = this->pntStart->nY = 0;
-	this->pntEnd->nX = this->pntEnd->nY = 0;
+	nShapeType = NULL;
+	pntStart->SetPoint(0, 0);
+	pntEnd->SetPoint(0, 0);
 }
-
 
 CShape::~CShape()
 {
@@ -22,20 +21,16 @@ int CShape::GetType()
 
 void CShape::SetPoint(int nStartX, int nStartY, int nEndX, int nEndY)
 {
-	this->pntStart->nX = nStartX;
-	this->pntStart->nY = nStartY;
-	this->pntEnd->nX = nEndX;
-	this->pntEnd->nY = nEndY;
+	pntStart->SetPoint(nStartX, nStartY);
+	pntEnd->SetPoint(nEndX, nEndY);
 }
 
-void CShape::SetStartPoint(int nStartX, int nStartY)
+CPoint* CShape::GetStartPoint()
 {
-	this->pntStart->nX = nStartX;
-	this->pntStart->nY = nStartY;
+	return pntStart;
 }
 
-void CShape::SetEndPoint(int nEndX, int nEndY)
+CPoint* CShape::GetEndPoint()
 {
-	this->pntEnd->nX = nEndX;
-	this->pntEnd->nY = nEndY;
+	return pntEnd;
 }

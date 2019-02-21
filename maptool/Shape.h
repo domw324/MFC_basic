@@ -1,5 +1,6 @@
 #pragma once
 #include "Point.h"
+#include <atltypes.h>
 
 class CShape
 {
@@ -9,12 +10,12 @@ public:
 
 	int GetType();
 	void SetPoint(int nStartX, int nStartY, int nEndX, int nEndY);
-	void SetStartPoint(int nStartX, int nStartY);
-	void SetEndPoint(int nEndX, int nEndY);
+	CPoint* GetStartPoint();
+	CPoint* GetEndPoint();
 
 protected:
-	Point* pntStart;
-	Point* pntEnd;
+	CPoint* pntStart;
+	CPoint* pntEnd;
 	int nShapeType;
 
 private:
