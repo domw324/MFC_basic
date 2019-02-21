@@ -5,9 +5,9 @@
 #pragma once
 #include "maptoolDoc.h"
 #include "Shape.h"
-#include <vector>
 #include <iostream>
 #include <WinUser.h>
+#include "ShapeHandler.h"
 
 class CmaptoolView : public CView
 {
@@ -48,29 +48,30 @@ protected:
 	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
 	DECLARE_MESSAGE_MAP()
 
-// 넣고 싶은 기능
+//////////////////////////////////////////////////////////////////////////
+/// 커스텀 인스턴스
 public: 
-	/// 이제 마우스 클릭 이벤트를 생성하자.
-	/// 마우스 클릭하면 모드에 해당되는 객체가 생성되고
 	/// 생성된 객체에는 시작점과 끝점의 정보가 담긴다.
 	/// 암튼 저 Draw를 활용해서 그리는 걸로 하자
 	/// 그리고 사각형 내부 색칠을 없에는 함수도 만들자. 얍!
-	
-	virtual void SetDrawMode(int nDrawMode);
-
-	virtual void DrawLine(CPoint &pntStart, CPoint &pntEnd); /// 라인 생성
-	virtual void DrawRect(CPoint &pntStart, CPoint &pntEnd); /// 사각형 생성
-
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+	virtual void SetDrawMode(int nDrawMode);
 
-	void PointCheck(CPoint &point);
 private:
+	afx_msg void OnPaint();
+	virtual void DrawLine(CPoint &pntStart, CPoint &pntEnd); /// 라인 생성
+	virtual void DrawRect(CPoint &pntStart, CPoint &pntEnd); /// 사각형 생성
+	virtual void DrawPoint(CPoint &point); /// 필요하면 만들어 쓰자
+	virtual void CheckPoint(CPoint &point);
+
 	int m_nDrawMode;
 	bool m_bDragFlag;
 	CPoint m_CurrentMouse;
 	CPoint m_StartMouse;
+
+	CShapeHandler pShapeHandler;
 };
 
 #ifndef _DEBUG  // maptoolView.cpp의 디버그 버전

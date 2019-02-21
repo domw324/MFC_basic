@@ -12,6 +12,10 @@
 #include "maptoolDoc.h"
 #include "maptoolView.h"
 #include "define.h"
+#include "Line.h"
+#include "Shape.h"
+#include "Rect.h"
+#include "BufferDC.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -108,52 +112,14 @@ void CmaptoolView::OnContextMenu(CWnd* /* pWnd */, CPoint point)
 #endif
 }
 
-void CmaptoolView::DrawLine(CPoint &pntStart, CPoint &pntEnd)
-{
-	RedrawWindow();
-
-	CDC* p = this->GetWindowDC();
-
-	p->MoveTo(pntStart.x, pntStart.y);
- 	p->LineTo(pntEnd.x, pntEnd.y);
-
-	this->ReleaseDC(p);
-}
-
-void CmaptoolView::DrawRect(CPoint &pntStart, CPoint &pntEnd)
-{
-	RedrawWindow();
-
-	CDC* p = this->GetWindowDC();
-
-	p->Rectangle(pntStart.x, pntStart.y, pntEnd.x, pntEnd.y);
-
-	this->ReleaseDC(p);
-}
-
-void CmaptoolView::SetDrawMode(int nDrawMode)
-{
-	this->m_nDrawMode = nDrawMode;
-}
-
 void CmaptoolView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	m_bDragFlag = true;
-	PointCheck(point);
+	CheckPoint(point);
 
 	m_StartMouse = point;
 	
-// 	CDC* p = this->GetWindowDC();
-// 	CString strPoint = _T("test");
-// 	strPoint.Format(_T("X:%03d, Y%03d"), m_StartMouse.x, m_StartMouse.y);
-// 
-//  	RedrawWindow();
-// 
-// 	p->TextOutW(m_StartMouse.x, m_StartMouse.y, strPoint);
-// 
-// 	this->ReleaseDC(p);
-
  	SetCapture(); /// 활성 영역 외의 메세지 받는 함수이다. 활성화 되면 다른 컨트롤 사용 불가.
 
 	CView::OnLButtonDown(nFlags, point);
@@ -164,17 +130,35 @@ void CmaptoolView::OnLButtonUp(UINT nFlags, CPoint point)
 	m_bDragFlag = false;
 	m_CurrentMouse = point;
 
-	if (m_nDrawMode == SHAPE::S_LINE)
+	switch (m_nDrawMode)
 	{
-		DrawLine(m_StartMouse, m_CurrentMouse);
-	}
-	else if(m_nDrawMode == SHAPE::S_RECT)
+	case MODE::DRAW_LINE:
 	{
-		DrawRect(m_StartMouse, m_CurrentMouse);
+		pShapeHandler.CreateShape(SHAPE::S_LINE, m_StartMouse, m_CurrentMouse);
 	}
-	else {} // SHAPE::NONE
+	break;
 
-	ReleaseCapture();
+	case MODE::DRAW_RECT:
+	{
+		pShapeHandler.CreateShape(SHAPE::S_RECT, m_StartMouse, m_CurrentMouse);
+	}
+	break;
+
+	case MODE::NONE:
+	{
+	}
+	break;
+
+	default:
+		break;
+	}
+
+	ReleaseCapture(); /// 포커싱 해제
+
+	RedrawWindow();
+	OnPaint();
+
+	CView::OnLButtonUp(nFlags, point);
 }
 
 void CmaptoolView::OnMouseMove(UINT nFlags, CPoint point)
@@ -184,27 +168,93 @@ void CmaptoolView::OnMouseMove(UINT nFlags, CPoint point)
 	if (m_bDragFlag)
 	{
 		m_CurrentMouse = point;
-		if (m_nDrawMode == SHAPE::S_LINE)
-		{
 
-//  			CDC* p = this->GetWindowDC();
-//  			CView::OnMouseMove(nFlags, point);
-//  			CString strPoint = _T("test");
-//  			strPoint.Format(_T("X:%03d, Y%03d"), m_CurrentMouse.x, m_CurrentMouse.y);
-//  			RedrawWindow();
-//  			p->TextOutW(m_CurrentMouse.x, m_CurrentMouse.y, strPoint);
+		RedrawWindow();
+		OnPaint();
 
-			DrawLine(m_StartMouse, m_CurrentMouse);
-		}
-		else if(m_nDrawMode == SHAPE::S_RECT)
-		{
-			DrawRect(m_StartMouse, m_CurrentMouse);
-		}
-		else {} // SHAPE::NONE
+ 		switch (m_nDrawMode)
+ 		{
+ 		case MODE::DRAW_LINE:
+ 		{
+ 			DrawLine(m_StartMouse, m_CurrentMouse);
+ 		}
+ 		break;
+ 
+ 		case MODE::DRAW_RECT:
+ 		{
+ 			DrawRect(m_StartMouse, m_CurrentMouse);
+ 		}
+ 		break;
+ 
+		case MODE::NONE:
+			break;
+ 
+ 		default:
+			break;
+ 		}
 	}
 }
 
-void CmaptoolView::PointCheck(CPoint & point)
+void CmaptoolView::SetDrawMode(int nDrawMode)
+{
+	this->m_nDrawMode = nDrawMode;
+}
+
+inline void CmaptoolView::OnPaint()
+{
+
+	for (int i=0 ; i<pShapeHandler.GetSize() ; i++)
+	{
+		CShape* pTempShape = pShapeHandler.GetObject(i);
+		int nTempType = pTempShape->GetType();
+
+		switch (nTempType)
+		{
+		case SHAPE::S_LINE:
+		{
+			CLine* pTempLine = dynamic_cast<CLine*>(pTempShape);
+			DrawLine(pTempLine->GetStartPoint(), pTempLine->GetEndPoint());
+		}
+		break;
+
+		case SHAPE::S_RECT:
+		{
+			CRectg* pTempRect = dynamic_cast<CRectg*>(pTempShape);
+			DrawRect(pTempRect->GetStartPoint(), pTempRect->GetEndPoint());
+		}
+		break;
+
+		default:
+			break;
+		}
+	}
+}
+
+void CmaptoolView::DrawLine(CPoint &pntStart, CPoint &pntEnd)
+{
+	CDC* p = this->GetWindowDC();
+
+	p->MoveTo(pntStart.x, pntStart.y);
+ 	p->LineTo(pntEnd.x, pntEnd.y);
+
+	this->ReleaseDC(p);
+}
+
+void CmaptoolView::DrawRect(CPoint &pntStart, CPoint &pntEnd)
+{
+	CDC* p = this->GetWindowDC();
+
+	p->Rectangle(pntStart.x, pntStart.y, pntEnd.x, pntEnd.y);
+
+	this->ReleaseDC(p);
+}
+
+void CmaptoolView::DrawPoint(CPoint & point)
+{
+	/// 필요시 코딩
+}
+
+void CmaptoolView::CheckPoint(CPoint & point)
 {
 	if (point.x < 0)
 	{

@@ -69,6 +69,9 @@
     <ClInclude Include="ShapeHandler.h">
       <Filter>소스 파일\ShapeHandler</Filter>
     </ClInclude>
+    <ClInclude Include="BufferDC.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="maptool.cpp">
@@ -106,6 +109,9 @@
     </ClCompile>
     <ClCompile Include="ShapeHandler.cpp">
       <Filter>소스 파일\ShapeHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferDC.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

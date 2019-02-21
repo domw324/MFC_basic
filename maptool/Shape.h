@@ -8,14 +8,15 @@ public:
 	CShape();
 	~CShape();
 
-	int GetType();
-	void SetPoint(int nStartX, int nStartY, int nEndX, int nEndY);
-	CPoint* GetStartPoint();
-	CPoint* GetEndPoint();
+	virtual int GetType();
+	virtual void SetPoint(CPoint pntStart, CPoint pntEnd);
+	virtual CShape* GetInstance();
+	virtual CPoint GetStartPoint();
+	virtual CPoint GetEndPoint();
 
 protected:
-	CPoint* pntStart;
-	CPoint* pntEnd;
+	CPoint pntStart;
+	CPoint pntEnd;
 	int nShapeType;
 
 private:

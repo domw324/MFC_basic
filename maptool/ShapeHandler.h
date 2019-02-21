@@ -1,16 +1,19 @@
 #pragma once
 #include <vector>
-#include <iostream>
-#include "Shape.h"
+
+class CShape;
 
 class CShapeHandler {
 public:
 	CShapeHandler();
 	~CShapeHandler();
 
-	void CreateShape(int nShapeType, int nStartX, int nStartY, int nEndX, int nEndY);
+	void CreateShape(int nShapeType, CPoint pntStart, CPoint pntEnd);
 	void DeleteShape(int nIndex);
+	void DeleteAll();
+	CShape* GetObject(int nIndex);
+	int GetSize();
+	// void SetShape(int nIndex, CPoint pntStart, CPoint pntEnd); /// 필요 시 구현
 
-private:
-	std::vector<CShape*> *m_ShapeArr;
+	std::vector<CShape*> m_ShapeArr;
 };

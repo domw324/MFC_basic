@@ -7,14 +7,10 @@
 CRectg::CRectg()
 {
 	this->nShapeType = SHAPE::S_RECT;
-	this->pntStart->nX = this->pntStart->nY = 0;
-	this->pntEnd->nX = this->pntEnd->nY = 0;
 }
 
 CRectg::~CRectg()
 {
-	delete(this->pntStart);
-	delete(this->pntEnd);
 }
 
 //void CRectg::DrawShape()
@@ -24,7 +20,7 @@ CRectg::~CRectg()
 //
 //	CDC* p = pView->GetWindowDC();
 //	   
-//	p->Rectangle(pntStart->nX, pntStart->nY, pntEnd->nX, pntEnd->nY);
+//	p->Rectangle(pntStart.x, pntStart.y, pntEnd.x, pntEnd.y);
 //	
 //	pView->ReleaseDC(p);
 //}

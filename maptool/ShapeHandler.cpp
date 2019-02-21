@@ -3,6 +3,7 @@
 #include "define.h"
 #include "Line.h"
 #include "Rect.h"
+#include <iostream>
 
 CShapeHandler::CShapeHandler()
 {
@@ -10,26 +11,47 @@ CShapeHandler::CShapeHandler()
 
 CShapeHandler::~CShapeHandler()
 {
-	delete(m_ShapeArr);
 }
 
-void CShapeHandler::CreateShape(int nShapeType, int nStartX, int nStartY, int nEndX, int nEndY)
+void CShapeHandler::CreateShape(int nShapeType, CPoint pntStart, CPoint pntEnd)
 {
-	if (nShapeType == SHAPE::S_LINE)
+	switch (nShapeType)
 	{
-		CLine* pLine = new CLine();
-		pLine->SetPoint(nStartX, nStartY, nEndX, nEndY);
-		m_ShapeArr->push_back(pLine);
+	case SHAPE::S_LINE:
+	{
+		CShape* pLine = new CLine();
+		pLine->SetPoint(pntStart, pntEnd);
+		m_ShapeArr.push_back(pLine);
 	}
-	else
+		break;
+	case SHAPE::S_RECT:
 	{
-		CRectg* pRectg = new CRectg();
-		pRectg->SetPoint(nStartX, nStartY, nEndX, nEndY);
-		m_ShapeArr->push_back(pRectg);
+		CShape* pRectg = new CRectg();
+		pRectg->SetPoint(pntStart, pntEnd);
+		m_ShapeArr.push_back(pRectg);
+	}
+		break;
+	default:
+		break;
 	}
 }
 
 void CShapeHandler::DeleteShape(int nIndex)
 {
-	m_ShapeArr->erase(m_ShapeArr->begin() + nIndex);
+	m_ShapeArr.erase(m_ShapeArr.begin() + nIndex);
+}
+
+void CShapeHandler::DeleteAll()
+{
+	/// ±¸Çö
+}
+
+CShape* CShapeHandler::GetObject(int nIndex)
+{
+	return m_ShapeArr.at(nIndex);
+}
+
+int CShapeHandler::GetSize()
+{
+	return m_ShapeArr.size();
 }

@@ -7,15 +7,11 @@
 CLine::CLine()
 {
 	this->nShapeType = SHAPE::S_LINE;
-	this->pntStart->nX = this->pntStart->nY = 0;
-	this->pntEnd->nX = this->pntEnd->nY = 0;
 }
 
 
 CLine::~CLine()
 {
-	delete(this->pntStart);
-	delete(this->pntEnd);
 }
 
 //void CLine::DrawShape()
@@ -25,8 +21,8 @@ CLine::~CLine()
 // 
 // 	CDC* p = pView->GetWindowDC();
 //
-// 	p->MoveTo(pntStart->nX, pntStart->nY);
-// 	p->LineTo(pntEnd->nX, pntEnd->nY);
+// 	p->MoveTo(pntStart.x, pntStart.y);
+// 	p->LineTo(pntEnd.x, pntEnd.y);
 // 	
 // 	pView->ReleaseDC(p);
 //}
