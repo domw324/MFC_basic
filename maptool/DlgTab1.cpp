@@ -45,6 +45,8 @@ BOOL CDlgTab1::OnInitDialog()
 	hChild_LINE = m_ctlTreeCtrl.InsertItem(L"Line", 1/* nImage */, 1/* nSelectedImage */, hRoot_OBJECT, TVI_LAST);
 	hChild_RECT = m_ctlTreeCtrl.InsertItem(L"Rect", 1/* nImage */, 1/* nSelectedImage */, hRoot_OBJECT, TVI_LAST);
 
+	m_ctlTreeCtrl.Expand(hRoot_OBJECT, TVE_EXPAND);
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
 }
@@ -72,7 +74,7 @@ void CDlgTab1::InsertTree(int nShapeType, int nId)
 	default:
 		break;
 	}
-	
+	ExpandTree(nShapeType);
 }
 
 //  void CDlgTab1::DeleteTree(int nShapeType, int nId)
@@ -134,6 +136,7 @@ void CDlgTab1::DeleteTreeBack(int nShapeType)
 	default:
 		break;
 	}
+	ExpandTree(nShapeType);
 }
 
 void CDlgTab1::DeleteTreeAll()
@@ -150,5 +153,28 @@ void CDlgTab1::DeleteTreeAll()
 		hDeleteChild = m_ctlTreeCtrl.GetNextItem(hChild_RECT, TVGN_CHILD);
 		m_ctlTreeCtrl.DeleteItem(hDeleteChild);
 	}
+}
+
+void CDlgTab1::ExpandTree(int nShapeType)
+{
+	switch (nShapeType)
+	{
+	case SHAPE::S_LINE:
+	{
+		m_ctlTreeCtrl.Expand(hChild_LINE, TVE_EXPAND);
+	}
+	break;
+
+	case SHAPE::S_RECT:
+	{
+		m_ctlTreeCtrl.Expand(hChild_RECT, TVE_EXPAND);
+	}
+	break;
+
+	default:
+		break;
+	}
+	
+	
 }
 

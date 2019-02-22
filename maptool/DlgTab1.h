@@ -28,11 +28,11 @@ public:
 	virtual BOOL OnInitDialog();
 
 //////////////////////////////////////////////////////////////////////////
-	/// 구현하고 싶은 것! 카테고리 추가 및 삭제 가능하게
+	/// Tree Instance 추가 및 삭제
 public:
 	virtual void InsertTree(int nShapeType, int nId);
 	/*virtual void DeleteTree(int nShapeType, int nId);*/
-	virtual void DeleteTreeBack(int nTnShapeType);
+	virtual void DeleteTreeBack(int nShapeType);
 	virtual void DeleteTreeAll();
 
 private:
@@ -41,6 +41,8 @@ private:
 	HTREEITEM  hChild_RECT;
 
 	CString strInsertName;
+
+	virtual void ExpandTree(int nShapeType);
 
 	int nTreeLineNum;
 	int NTreeRectNum;

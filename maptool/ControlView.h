@@ -39,7 +39,7 @@ public:
 	CDlgTab1* m_pDialog1;
 	CDlgTab2* m_pDialog2;
 	virtual void OnInitialUpdate();
-	afx_msg void OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult); /// 탭을 클릭했을 때 이벤트
+	afx_msg void OnTcnSelchangeTab(NMHDR *pNMHDR, LRESULT *pResult); /// 탭을 클릭했을 때 이벤트
 	virtual void InsertTree(int nShapeType, int nId);
 	virtual void DeleteTreeBack(int nShapeType);
 	virtual void DeleteTreeAll();

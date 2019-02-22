@@ -16,6 +16,8 @@
 
 BEGIN_MESSAGE_MAP(CSplitterX, CSplitterWnd)
 	ON_WM_NCHITTEST()
+// 	ON_COMMAND(ID_FILE_OPEN, &CMainFrame::OnClickedFileOpen)
+// 	ON_COMMAND(ID_FILE_SAVE, &CMainFrame::OnClickedFileOpen)
 END_MESSAGE_MAP()
 
 CSplitterX::CSplitterX() {}
@@ -241,6 +243,13 @@ LRESULT CMainFrame::OnToolbarCreateNew(WPARAM wp,LPARAM lp)
 	pUserToolbar->EnableCustomizeButton(TRUE, ID_VIEW_CUSTOMIZE, strCustomize);
 	return lres;
 }
+
+//////////////////////////////////////////////////////////////////////////
+/// 커스텀_툴바
+// void CMainFrame::OnClickedToolBarEx()
+// {
+// 	/*m_ctlToolBar*/
+// }
 
 
 BOOL CMainFrame::LoadFrame(UINT nIDResource, DWORD dwDefaultStyle, CWnd* pParentWnd, CCreateContext* pContext)

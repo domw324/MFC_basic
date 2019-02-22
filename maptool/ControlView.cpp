@@ -31,7 +31,7 @@ void CControlView::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CControlView, CFormView)
-	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, &CControlView::OnTcnSelchangeTab1)
+	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, &CControlView::OnTcnSelchangeTab)
 END_MESSAGE_MAP()
 
 
@@ -92,7 +92,7 @@ void CControlView::OnInitialUpdate()
 }
 
 
-void CControlView::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
+void CControlView::OnTcnSelchangeTab(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	

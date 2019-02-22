@@ -34,6 +34,13 @@ public:
 
 	afx_msg void OnAppAbout();
 	DECLARE_MESSAGE_MAP()
+
+	//////////////////////////////////////////////////////////////////////////
+	/// 툴바 조작 하고 싶다
+private:
+// 	afx_msg void OnFileNew();
+//  afx_msg void OnFileOpen();
+//	afx_msg void OnFileSave();
 };
 
 extern CmaptoolApp theApp;

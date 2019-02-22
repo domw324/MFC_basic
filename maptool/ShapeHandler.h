@@ -16,7 +16,6 @@ public:
 	int GetSize();
 	// void SetShape(int nIndex, CPoint pntStart, CPoint pntEnd); /// 필요 시 구현
 
-
 private:
 	std::vector<CShape*> m_ShapeArr;
 

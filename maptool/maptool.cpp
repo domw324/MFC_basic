@@ -23,6 +23,7 @@ BEGIN_MESSAGE_MAP(CmaptoolApp, CWinAppEx)
 	// 표준 파일을 기초로 하는 문서 명령입니다.
 	ON_COMMAND(ID_FILE_NEW, &CWinAppEx::OnFileNew)
 	ON_COMMAND(ID_FILE_OPEN, &CWinAppEx::OnFileOpen)
+	//ON_COMMAND(ID_FILE_SAVE, &CDocument::OnFileSave)
 	// 표준 인쇄 설정 명령입니다.
 	ON_COMMAND(ID_FILE_PRINT_SETUP, &CWinAppEx::OnFilePrintSetup)
 END_MESSAGE_MAP()
@@ -187,6 +188,21 @@ void CmaptoolApp::OnAppAbout()
 	CAboutDlg aboutDlg;
 	aboutDlg.DoModal();
 }
+
+// void CmaptoolApp::OnFileNew()
+// {
+// 	std::cout << "wtf";
+// }
+
+// void CmaptoolApp::OnFileOpen()
+// {
+// 	std::cout << "hello";
+// }
+
+// void CmaptoolApp::OnFileSave()
+// {
+// 	std::cout << "hello";
+// }
 
 // CmaptoolApp 사용자 지정 로드/저장 방법
 
