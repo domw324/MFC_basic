@@ -22,8 +22,14 @@ CShape* CShape::GetInstance()
 	return this;
 }
 
-void CShape::SetPoint(CPoint pntStart, CPoint pntEnd)
+int CShape::GetId()
 {
+	return this->nId;
+}
+
+void CShape::SetShapeInfo(int nId, CPoint pntStart, CPoint pntEnd)
+{
+	this->nId = nId;
 	this->pntStart = pntStart;
 	this->pntEnd = pntEnd;
 }

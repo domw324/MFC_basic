@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "maptool.h"
 #include "ControlView.h"
+#include "define.h"
 
 #define SAFE_DELETE(p) {if(p) {delete(p); (p)=NULL;} }
 
@@ -109,4 +110,19 @@ void CControlView::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 		break;
 	}
 	*pResult = 0;
+}
+
+void CControlView::InsertTree(int nShapeType, int nId)
+{
+	m_pDialog1->InsertTree(nShapeType, nId);
+}
+
+void CControlView::DeleteTreeBack(int nShapeType)
+{
+	m_pDialog1->DeleteTreeBack(nShapeType);
+}
+
+void CControlView::DeleteTreeAll()
+{
+	m_pDialog1->DeleteTreeAll();
 }

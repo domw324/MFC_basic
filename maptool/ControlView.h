@@ -5,6 +5,8 @@
 
 #include "DlgTab1.h"
 #include "DlgTab2.h"
+#include "Resource.h"
+#include "Shape.h"
 
 class CControlView : public CFormView
 {
@@ -38,4 +40,7 @@ public:
 	CDlgTab2* m_pDialog2;
 	virtual void OnInitialUpdate();
 	afx_msg void OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult); /// 탭을 클릭했을 때 이벤트
+	virtual void InsertTree(int nShapeType, int nId);
+	virtual void DeleteTreeBack(int nShapeType);
+	virtual void DeleteTreeAll();
 };

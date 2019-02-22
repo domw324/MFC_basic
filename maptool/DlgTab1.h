@@ -1,4 +1,7 @@
 ﻿#pragma once
+#include <afxstr.h>
+#include <stack>
+#include <vector>
 
 
 // CDlgTab1 대화 상자
@@ -21,6 +24,27 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
-	CTreeCtrl m_ctlTreeCtrl1;
+	CTreeCtrl m_ctlTreeCtrl;
 	virtual BOOL OnInitDialog();
+
+//////////////////////////////////////////////////////////////////////////
+	/// 구현하고 싶은 것! 카테고리 추가 및 삭제 가능하게
+public:
+	virtual void InsertTree(int nShapeType, int nId);
+	/*virtual void DeleteTree(int nShapeType, int nId);*/
+	virtual void DeleteTreeBack(int nTnShapeType);
+	virtual void DeleteTreeAll();
+
+private:
+	HTREEITEM  hRoot_OBJECT;
+	HTREEITEM  hChild_LINE;
+	HTREEITEM  hChild_RECT;
+
+	CString strInsertName;
+
+	int nTreeLineNum;
+	int NTreeRectNum;
+
+// 	std::vector<int> m_nLineIndex;
+// 	std::vector<int> m_nRectIndex;
 };
