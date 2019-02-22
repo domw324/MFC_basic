@@ -37,7 +37,7 @@ BEGIN_MESSAGE_MAP(CmaptoolView, CView) /// 사용할 메시지를 미리 등록�
 	ON_WM_LBUTTONDOWN()
 	ON_WM_LBUTTONUP()
 	ON_WM_MOUSEMOVE()
-// 	ON_WM_KEYDOWN()
+ 	ON_WM_KEYDOWN()
 // 	ON_WM_KEYUP()
 // 	ON_WM_CHAR()
 END_MESSAGE_MAP()
@@ -200,18 +200,17 @@ void CmaptoolView::OnMouseMove(UINT nFlags, CPoint point)
 	}
 }
 
-// void CmaptoolView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
-// {
-// 	//TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-// 
-// 	if (GetKeyState(VK_CONTROL) & 0x8000)
-// 	{
-// 
-// 		m_bCtrlKey = TRUE;
-// 	}
-// 
-// 	CView::OnKeyDown(nChar, nRepCnt, nFlags);
-// }
+ void CmaptoolView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+ {
+ 	//TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+ 
+	 if ((::GetAsyncKeyState(VK_CONTROL) & 0x8001) && nChar == _T('Z'))
+	 {
+		 DeleteBack();
+	 }
+	 /// Ctrl+Z 가 아니라 Ctral+다른키+Z를 입력해야 된다.. 이걸 바꿔야한다..
+	 CView::OnKeyDown(nChar, nRepCnt, nFlags);
+ }
 // 
 // void CmaptoolView::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 // {
