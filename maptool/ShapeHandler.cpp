@@ -8,6 +8,8 @@
 #include "DlgTab1.h"
 #include "ControlView.h"
 
+CShapeHandler* CShapeHandler::pShapeHandler = NULL;
+
 CShapeHandler::CShapeHandler()
 {
 	nLineNum = nRectNum = 0;
@@ -15,6 +17,15 @@ CShapeHandler::CShapeHandler()
 
 CShapeHandler::~CShapeHandler()
 {
+}
+
+CShapeHandler * CShapeHandler::GetInstance()
+{
+	if (pShapeHandler)
+	{
+		pShapeHandler = new CShapeHandler();
+	}
+	return pShapeHandler;
 }
 
 void CShapeHandler::CreateShape(int nShapeType, CPoint pntStart, CPoint pntEnd)

@@ -16,10 +16,10 @@
 #endif
 
 
-// CmaptoolApp
+// CMapToolApp
 
-BEGIN_MESSAGE_MAP(CmaptoolApp, CWinAppEx)
-	ON_COMMAND(ID_APP_ABOUT, &CmaptoolApp::OnAppAbout)
+BEGIN_MESSAGE_MAP(CMapToolApp, CWinAppEx)
+	ON_COMMAND(ID_APP_ABOUT, &CMapToolApp::OnAppAbout)
 	// 표준 파일을 기초로 하는 문서 명령입니다.
 	ON_COMMAND(ID_FILE_NEW, &CWinAppEx::OnFileNew)
 	ON_COMMAND(ID_FILE_OPEN, &CWinAppEx::OnFileOpen)
@@ -29,9 +29,9 @@ BEGIN_MESSAGE_MAP(CmaptoolApp, CWinAppEx)
 END_MESSAGE_MAP()
 
 
-// CmaptoolApp 생성
+// CMapToolApp 생성
 
-CmaptoolApp::CmaptoolApp() noexcept
+CMapToolApp::CMapToolApp() noexcept
 {
 	m_bHiColorIcons = TRUE;
 
@@ -52,14 +52,14 @@ CmaptoolApp::CmaptoolApp() noexcept
 	// InitInstance에 모든 중요한 초기화 작업을 배치합니다.
 }
 
-// 유일한 CmaptoolApp 개체입니다.
+// 유일한 CMapToolApp 개체입니다.
 
-CmaptoolApp theApp;
+CMapToolApp theApp;
 
 
-// CmaptoolApp 초기화
+// CMapToolApp 초기화
 
-BOOL CmaptoolApp::InitInstance()
+BOOL CMapToolApp::InitInstance()
 {
 	// 응용 프로그램 매니페스트가 ComCtl32.dll 버전 6 이상을 사용하여 비주얼 스타일을
 	// 사용하도록 지정하는 경우, Windows XP 상에서 반드시 InitCommonControlsEx()가 필요합니다. 
@@ -139,7 +139,7 @@ BOOL CmaptoolApp::InitInstance()
 	return TRUE;
 }
 
-int CmaptoolApp::ExitInstance()
+int CMapToolApp::ExitInstance()
 {
 	//TODO: 추가한 추가 리소스를 처리합니다.
 	AfxOleTerm(FALSE);
@@ -147,7 +147,7 @@ int CmaptoolApp::ExitInstance()
 	return CWinAppEx::ExitInstance();
 }
 
-// CmaptoolApp 메시지 처리기
+// CMapToolApp 메시지 처리기
 
 
 // 응용 프로그램 정보에 사용되는 CAboutDlg 대화 상자입니다.
@@ -183,30 +183,30 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
 
 // 대화 상자를 실행하기 위한 응용 프로그램 명령입니다.
-void CmaptoolApp::OnAppAbout()
+void CMapToolApp::OnAppAbout()
 {
 	CAboutDlg aboutDlg;
 	aboutDlg.DoModal();
 }
 
-// void CmaptoolApp::OnFileNew()
+// void CMapToolApp::OnFileNew()
 // {
 // 	std::cout << "wtf";
 // }
 
-// void CmaptoolApp::OnFileOpen()
+ void CMapToolApp::OnFileOpen()
+ {
+ 	std::cout << "hello";
+ }
+
+// void CMapToolApp::OnFileSave()
 // {
 // 	std::cout << "hello";
 // }
 
-// void CmaptoolApp::OnFileSave()
-// {
-// 	std::cout << "hello";
-// }
+// CMapToolApp 사용자 지정 로드/저장 방법
 
-// CmaptoolApp 사용자 지정 로드/저장 방법
-
-void CmaptoolApp::PreLoadState()
+void CMapToolApp::PreLoadState()
 {
 	BOOL bNameValid;
 	CString strName;
@@ -215,15 +215,15 @@ void CmaptoolApp::PreLoadState()
 	GetContextMenuManager()->AddMenu(strName, IDR_POPUP_EDIT);
 }
 
-void CmaptoolApp::LoadCustomState()
+void CMapToolApp::LoadCustomState()
 {
 }
 
-void CmaptoolApp::SaveCustomState()
+void CMapToolApp::SaveCustomState()
 {
 }
 
-// CmaptoolApp 메시지 처리기
+// CMapToolApp 메시지 처리기
 
 
 

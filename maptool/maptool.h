@@ -10,14 +10,14 @@
 #include "resource.h"       // 주 기호입니다.
 
 
-// CmaptoolApp:
+// CMapToolApp:
 // 이 클래스의 구현에 대해서는 maptool.cpp을(를) 참조하세요.
 //
 
-class CmaptoolApp : public CWinAppEx
+class CMapToolApp : public CWinAppEx
 {
 public:
-	CmaptoolApp() noexcept;
+	CMapToolApp() noexcept;
 
 
 // 재정의입니다.
@@ -39,8 +39,8 @@ public:
 	/// 툴바 조작 하고 싶다
 private:
 // 	afx_msg void OnFileNew();
-//  afx_msg void OnFileOpen();
+  afx_msg void OnFileOpen();
 //	afx_msg void OnFileSave();
 };
 
-extern CmaptoolApp theApp;
+extern CMapToolApp theApp;
