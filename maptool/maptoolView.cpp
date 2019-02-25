@@ -51,6 +51,8 @@ CmaptoolView::CmaptoolView() noexcept
 	this->m_nDrawMode = MODE::NONE;
 	this->m_bDragFlag = FALSE;
 	this->m_bCtrlKey = FALSE;
+
+	m_pShapeHandler = CShapeHandler::GetInstance();
 }
 
 CmaptoolView::~CmaptoolView()
@@ -139,13 +141,13 @@ void CmaptoolView::OnLButtonUp(UINT nFlags, CPoint point)
 	{
 	case MODE::DRAW_LINE:
 	{
-		pShapeHandler.CreateShape(SHAPE::S_LINE, m_StartMouse, m_CurrentMouse);
+		m_pShapeHandler->CreateShape(SHAPE::S_LINE, m_StartMouse, m_CurrentMouse);
 	}
 	break;
 
 	case MODE::DRAW_RECT:
 	{
-		pShapeHandler.CreateShape(SHAPE::S_RECT, m_StartMouse, m_CurrentMouse);
+		m_pShapeHandler->CreateShape(SHAPE::S_RECT, m_StartMouse, m_CurrentMouse);
 	}
 	break;
 
@@ -243,7 +245,7 @@ void CmaptoolView::SetDrawMode(int nDrawMode)
 
 void CmaptoolView::DeleteBack()
 {
-	pShapeHandler.DeleteBack();
+	m_pShapeHandler->DeleteBack();
 
 	RedrawWindow();
 	OnPaint();
@@ -251,7 +253,7 @@ void CmaptoolView::DeleteBack()
 
 void CmaptoolView::DeleteAll()
 {
-	pShapeHandler.DeleteAll();
+	m_pShapeHandler->DeleteAll();
 
 	RedrawWindow();
 }
@@ -259,9 +261,9 @@ void CmaptoolView::DeleteAll()
 inline void CmaptoolView::OnPaint()
 {
 
-	for (int i=0 ; i<pShapeHandler.GetSize() ; i++)
+	for (int i=0 ; i<m_pShapeHandler->GetSize() ; i++)
 	{
-		CShape* pTempShape = pShapeHandler.GetObject(i);
+		CShape* pTempShape = m_pShapeHandler->GetObject(i);
 		int nTempType = pTempShape->GetType();
 
 		switch (nTempType)

@@ -21,7 +21,7 @@ CShapeHandler::~CShapeHandler()
 
 CShapeHandler * CShapeHandler::GetInstance()
 {
-	if (pShapeHandler)
+	if (!pShapeHandler)
 	{
 		pShapeHandler = new CShapeHandler();
 	}

@@ -63,9 +63,9 @@ public:
 	virtual void SetDrawMode(int nDrawMode);
 	virtual void DeleteBack();
 	virtual void DeleteAll();
+	afx_msg void OnPaint();
 
 private:
-	afx_msg void OnPaint();
 	virtual void DrawLine(CPoint &pntStart, CPoint &pntEnd); /// 라인 생성
 	virtual void DrawRect(CPoint &pntStart, CPoint &pntEnd); /// 사각형 생성
 	virtual void DrawPoint(CPoint &point); /// 필요하면 만들어 쓰자
@@ -77,7 +77,7 @@ private:
 	CPoint m_StartMouse;
 	bool m_bCtrlKey;
 
-	CShapeHandler pShapeHandler;
+	CShapeHandler *m_pShapeHandler;
 };
 
 #ifndef _DEBUG  // maptoolView.cpp의 디버그 버전

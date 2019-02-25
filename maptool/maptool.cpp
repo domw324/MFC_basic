@@ -10,6 +10,8 @@
 
 #include "maptoolDoc.h"
 #include "maptoolView.h"
+#include "FileManager.h"
+#include "ShapeHandler.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -22,9 +24,11 @@ BEGIN_MESSAGE_MAP(CMapToolApp, CWinAppEx)
 	ON_COMMAND(ID_APP_ABOUT, &CMapToolApp::OnAppAbout)
 	// 표준 파일을 기초로 하는 문서 명령입니다.
 	ON_COMMAND(ID_FILE_NEW, &CWinAppEx::OnFileNew)
-	ON_COMMAND(ID_FILE_OPEN, &CWinAppEx::OnFileOpen)
+	//ON_COMMAND(ID_FILE_OPEN, &CWinAppEx::OnFileOpen)
 	//ON_COMMAND(ID_FILE_SAVE, &CDocument::OnFileSave)
 	// 표준 인쇄 설정 명령입니다.
+ 	ON_COMMAND(ID_FILE_OPEN, &CFileManager::OnFileOpen)
+ 	ON_COMMAND(ID_FILE_SAVE, &CFileManager::OnFileSave)
 	ON_COMMAND(ID_FILE_PRINT_SETUP, &CWinAppEx::OnFilePrintSetup)
 END_MESSAGE_MAP()
 
@@ -136,6 +140,9 @@ BOOL CMapToolApp::InitInstance()
 	// 창 하나만 초기화되었으므로 이를 표시하고 업데이트합니다.
 	m_pMainWnd->ShowWindow(SW_SHOW);
 	m_pMainWnd->UpdateWindow();
+
+	initObject();
+
 	return TRUE;
 }
 
@@ -145,6 +152,11 @@ int CMapToolApp::ExitInstance()
 	AfxOleTerm(FALSE);
 
 	return CWinAppEx::ExitInstance();
+}
+
+void CMapToolApp::initObject()
+{
+
 }
 
 // CMapToolApp 메시지 처리기
@@ -193,11 +205,11 @@ void CMapToolApp::OnAppAbout()
 // {
 // 	std::cout << "wtf";
 // }
-
- void CMapToolApp::OnFileOpen()
- {
- 	std::cout << "hello";
- }
+// 
+//  void CMapToolApp::OnFileOpen()
+//  {
+//  	std::cout << "hello";
+//  }
 
 // void CMapToolApp::OnFileSave()
 // {

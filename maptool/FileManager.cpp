@@ -8,6 +8,8 @@
 #include "Shape.h"
 #include "Line.h"
 #include "Rect.h"
+#include "MainFrm.h"
+#include "maptoolView.h"
 
 CFileManager* CFileManager::pFileManager = NULL;
 
@@ -28,18 +30,17 @@ CFileManager * CFileManager::GetInstance()
 	return pFileManager;
 }
 
-bool CFileManager::LoadAsCsv()
+BOOL CFileManager::LoadAsCsv(LPCTSTR strPath)
 {
 	CShapeHandler* pShapeHandler = CShapeHandler::GetInstance();
 
-	CString strPath = _T("C:\\Users\\ssj0324\\source\\repos\\maptool\\maptool\\Example.csv");
+	//CString strPath = _T("C:\\Users\\ssj0324\\source\\repos\\maptool\\maptool\\Example.csv");
 
 	int nType;
 	int nStartX;
 	int nStartY;
 	int nEndX;
 	int nEndY;
-
 
 	/// in file stream 파일 읽기
 	std::ifstream file(strPath);
@@ -64,14 +65,20 @@ bool CFileManager::LoadAsCsv()
 	return TRUE;
 }
 
-bool CFileManager::SaveAsCsv()
+BOOL CFileManager::SaveAsCsv(LPCTSTR strPath)
 {
 	CShapeHandler* pShapeHandler = CShapeHandler::GetInstance();
 	
-	CString strPath = _T("C:\\Users\\ssj0324\\source\\repos\\maptool\\maptool\\Example.csv");
+	CString s = strPath;
+
+	s.Append(L".csv");
+
+	//CString strPath = _T("C:\\Users\\ssj0324\\source\\repos\\maptool\\maptool\\Example.csv");
+	
+
 
 	/// out file stream 파일 쓰기
-	std::ofstream file(strPath);
+	std::ofstream file(s);
 
 #pragma warning(push)
 #pragma warning(disable: 4018) // 파일 쓰기 시도
@@ -133,3 +140,43 @@ std::vector<std::string> CFileManager::ReadRow(std::istream & file, char cDelimi
 	return row;
 }
 
+// void CFileManager::OnFileNew()
+// {
+//  	CMainFrame* pFrame = (CMainFrame*)AfxGetMainWnd();
+//  	CmaptoolView* pView = (CmaptoolView*)pFrame->m_wndSplitter.GetPane(0, 0);
+//  	pView->DeleteAll();
+// }
+
+void CFileManager::OnFileOpen()
+{
+// 	char filter[] = "Cvs Files (*.csv)|*.csv||";
+// 	CFileDialog dlg(TRUE, NULL, NULL, OFN_ALLOWMULTISELECT, filter);
+	CFileDialog dlg(TRUE, NULL, NULL, OFN_ALLOWMULTISELECT); 
+	if (dlg.DoModal() == IDOK)
+	{
+		POSITION pos = dlg.GetStartPosition();
+		while (pos)
+		{
+			LoadAsCsv(dlg.GetNextPathName(pos));
+		}
+	}
+
+	CMainFrame* pFrame = (CMainFrame*)AfxGetMainWnd();
+	CmaptoolView* pView = (CmaptoolView*)pFrame->m_wndSplitter.GetPane(0, 0);
+	pView->OnPaint();
+}
+
+void CFileManager::OnFileSave()
+{
+// 	 	char filter[] = "Cvs Files (*.csv)|*.csv||";
+// 	 	CFileDialog dlg(TRUE, NULL, NULL, OFN_ALLOWMULTISELECT, filter);
+	CFileDialog dlg(FALSE, NULL, NULL, OFN_ALLOWMULTISELECT);
+	if (dlg.DoModal() == IDOK)
+	{
+		POSITION pos = dlg.GetStartPosition();
+		while (pos)
+		{
+			SaveAsCsv(dlg.GetNextPathName(pos));
+		}
+	}
+}

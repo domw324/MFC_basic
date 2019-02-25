@@ -6,17 +6,21 @@
 #include <sstream>
 #include <istream>
 
-class CFileManager
+class CFileManager : public CWinAppEx
 {
 public:
+	CFileManager* GetInstance();
+	BOOL LoadAsCsv(LPCTSTR strPath);
+	BOOL SaveAsCsv(LPCTSTR strPath);
+	std::vector<std::string> ReadRow(std::istream &file, char cDelimiter);
+
+	//afx_msg void OnFileNew();
+	afx_msg void OnFileOpen();
+	afx_msg void OnFileSave();
+
+private:
 	CFileManager();
 	~CFileManager();
 
-	CFileManager* GetInstance();
-	bool LoadAsCsv();
-	bool SaveAsCsv();
-	std::vector<std::string> ReadRow(std::istream &file, char cDelimiter);
-
-private:
-	static CFileManager* pFileManager;
+	static CFileManager* pFileManager; 
 };
