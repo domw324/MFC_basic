@@ -64,7 +64,6 @@ void CControlView::Dump(CDumpContext& dc) const
 // CControlView 메시지 처리기
 
 
-
 void CControlView::OnInitialUpdate()
 {
 	CFormView::OnInitialUpdate();

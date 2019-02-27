@@ -10,8 +10,9 @@
 
 #include "maptoolDoc.h"
 #include "maptoolView.h"
-#include "FileManager.h"
+#include "FileOpenManager.h"
 #include "ShapeHandler.h"
+#include "FileSaveManager.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -27,8 +28,8 @@ BEGIN_MESSAGE_MAP(CMapToolApp, CWinAppEx)
 	//ON_COMMAND(ID_FILE_OPEN, &CWinAppEx::OnFileOpen)
 	//ON_COMMAND(ID_FILE_SAVE, &CDocument::OnFileSave)
 	// 표준 인쇄 설정 명령입니다.
- 	ON_COMMAND(ID_FILE_OPEN, &CFileManager::OnFileOpen)
- 	ON_COMMAND(ID_FILE_SAVE, &CFileManager::OnFileSave)
+ 	ON_COMMAND(ID_FILE_OPEN, &CFileOpenManager::OnFileOpen)
+ 	ON_COMMAND(ID_FILE_SAVE, &CFileSaveManager::OnFileSave) /// 여기서 default OnfileSave()가 불러진다.
 	ON_COMMAND(ID_FILE_PRINT_SETUP, &CWinAppEx::OnFilePrintSetup)
 END_MESSAGE_MAP()
 

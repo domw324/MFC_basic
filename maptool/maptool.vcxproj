@@ -186,7 +186,8 @@
     <ClInclude Include="define.h" />
     <ClInclude Include="DlgTab1.h" />
     <ClInclude Include="DlgTab2.h" />
-    <ClInclude Include="FileManager.h" />
+    <ClInclude Include="FileOpenManager.h" />
+    <ClInclude Include="FileSaveManager.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="maptool.h" />
@@ -207,7 +208,8 @@
     <ClCompile Include="ControlView.cpp" />
     <ClCompile Include="DlgTab1.cpp" />
     <ClCompile Include="DlgTab2.cpp" />
-    <ClCompile Include="FileManager.cpp" />
+    <ClCompile Include="FileOpenManager.cpp" />
+    <ClCompile Include="FileSaveManager.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="maptool.cpp" />

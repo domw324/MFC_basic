@@ -72,7 +72,10 @@
     <ClInclude Include="BufferDC.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="FileManager.h">
+    <ClInclude Include="FileOpenManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSaveManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -116,7 +119,10 @@
     <ClCompile Include="BufferDC.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="FileManager.cpp">
+    <ClCompile Include="FileOpenManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="FileSaveManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

@@ -9,7 +9,6 @@
 #include "maptoolDoc.h"
 #include "maptoolView.h"
 #include "ControlView.h"
-#include "FileManager.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
