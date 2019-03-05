@@ -3,7 +3,7 @@ MFC 기본 과제 - Simple Sketch Demo program 제작
 
 해야할 것 목록을 작성해보자.
 
-<h3 보완점>
+<h3> 보완점 </h3>
 1.  메인 프레임 단계에서 실행하도록
     [Ctrl + Z] 스케치 되돌리기 : 이벤트 함수 사용 -> ID_EDIT_UNDO 사용.
 2.  현재 ID_FILE_OPEN을 활용하여 문서 열기 가능.
